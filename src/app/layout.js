@@ -1,7 +1,8 @@
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import Header from "@/components/common/header";
+import Footer from "@/components/common/footer";
+import { AntdRegistry } from '@ant-design/nextjs-registry';
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["100", "300", "400", "500", "700"] });
 
@@ -14,9 +15,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <Header />
-        <main className="main max-w-1500 mx-auto w-92%">{children}</main>
-        <Footer />
+        <AntdRegistry>
+          <Header />
+          <main className="main">{children}</main>
+          <Footer />
+        </AntdRegistry>
       </body>
     </html>
   );

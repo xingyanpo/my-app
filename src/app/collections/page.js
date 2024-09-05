@@ -1,4 +1,4 @@
-import React from 'react'
+import {Button} from 'antd'
 
 export const metadata = {
   title: "Collection",
@@ -6,6 +6,8 @@ export const metadata = {
 
 export default function collection() {
   return (
-    <div>collection</div>
+    <div>
+      <Button type="primary">All Collections</Button>
+    </div>
   )
 }
