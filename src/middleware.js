@@ -1,7 +1,7 @@
 import JWT from '@/utils/JWT'
 
 export function middleware(request) {
-  const token = request.headers.get('authorization')?.split(' ')[1];
+  const token = request.headers.get('Authorization')?.split(' ')[1];
   const { pathname } = request.nextUrl;
 
   if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
