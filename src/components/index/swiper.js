@@ -26,7 +26,7 @@ export default function SilderBar() {
     },
   ]);
   return (
-    <Swiper className='screen-h-re-heade' spaceBetween={50} slidesPerView={1} pagination={true} modules={[Pagination]} >
+    <Swiper className='screen-h-re-heade' spaceBetween={0} slidesPerView={1} pagination={true} modules={[Pagination]} >
       {
         banners.map((item) => {
           return (
