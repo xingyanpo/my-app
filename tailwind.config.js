@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
-        '1500': '1500px',
+        '1500': '1500px'
       },
       width: {
         '92%': '92%',

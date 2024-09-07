@@ -10,7 +10,6 @@ export async function middleware(request) {
       const payload = await JWT.verify(token);
       if (payload) {
         const newToken = await JWT.generate({username: payload.payload.username});
-        console.log(newToken);
         const response = NextResponse.next();
         response.headers.set('Authorization', newToken);
         return response; 

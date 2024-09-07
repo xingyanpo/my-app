@@ -1,6 +1,6 @@
 // app/admin/login/page.js
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import request from '@/utils/request';
 
@@ -9,6 +9,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const router = useRouter();
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      router.push('/admin/dashboard');
+    }
+  })
 
   const handleLogin = async () => {
     request({url: '/api/admin/auth', method: 'POST', data: {username, password}}).then(res=>{
