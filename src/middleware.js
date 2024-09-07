@@ -1,22 +1,25 @@
 import JWT from '@/utils/JWT'
+import { NextResponse } from 'next/server';
 
-export function middleware(request) {
-  const token = request.headers.get('Authorization')?.split(' ')[1];
-  const { pathname } = request.nextUrl;
+export async function middleware(request) {
+  const pathname = request.nextUrl.pathname
 
-  if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
-    if (!token) {
-      return new Response('未授权', { status: 403 });
-    }
-    try {
-      const decoded = JWT.verify(token);
-      request.user = decoded;
-    } catch (error) {
-      return new Response('无效的令牌', { status: 401 });
+  if (pathname.startsWith('/api/admin') && pathname !== '/api/admin/auth') {
+    const token = request.headers.get('Authorization');
+    if (token) {
+      const payload = await JWT.verify(token);
+      if (payload) {
+        const newToken = await JWT.generate({username: payload.payload.username});
+        console.log(newToken);
+        const response = NextResponse.next();
+        response.headers.set('Authorization', newToken);
+        return response; 
+      } else {
+        return NextResponse.json({ message: 'Token inválido', code: 1 }, { status: 401 });
+      }
+    } else {
+      return NextResponse.json({ message: 'Token is null', code: 1 }, { status: 401 });
     }
   }
-}
 
-export const config = {
-  matcher: ['/admin/:path*']
-};
+}

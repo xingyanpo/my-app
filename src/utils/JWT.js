@@ -1,13 +1,19 @@
-import jwt from 'jsonwebtoken';
-import { JWT_KEY } from '@/config/settings'
+import { SignJWT, jwtVerify } from 'jose';
+import { JWT_KEY } from '@/config/settings';
 
 const JWT = {
-  generate: (payload, secretKey = JWT_KEY, expiresIn = '10s') => {
-    return jwt.sign(payload, secretKey, { expiresIn });
+  generate: async (payload, secretKey = JWT_KEY, expiresIn = '1d') => {
+    const secret = new TextEncoder().encode(secretKey);
+    return await new SignJWT(payload)
+      .setProtectedHeader({ alg: 'HS256' })
+      .setIssuedAt() // 设置签发时间
+      .setExpirationTime(expiresIn) // 设置过期时间
+      .sign(secret); // 签名
   },
-  verify: (token, secretKey = JWT_KEY) => {
+  verify: async (token, secretKey = JWT_KEY) => {
+    const secret = new TextEncoder().encode(secretKey);
     try {
-      return jwt.verify(token, secretKey);
+      return await jwtVerify(token, secret);
     } catch (error) {
       return false;
     }
