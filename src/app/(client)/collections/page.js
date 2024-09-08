@@ -7,6 +7,7 @@ export const metadata = {
 export default function collection() {
   return (
     <div>
+      <div>This is All collections</div>
       <Button type="primary">All Collections</Button>
     </div>
   )
