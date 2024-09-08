@@ -13,7 +13,7 @@ module.exports = {
       width: {
         '92%': '92%',
       }
-    },
+    }
   },
   plugins: [],
 };

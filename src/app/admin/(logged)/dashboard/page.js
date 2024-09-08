@@ -6,12 +6,11 @@ import { useRouter } from 'next/navigation';
 export default function Page() {
   const router = useRouter();
   useEffect(() => {
-    request({url: '/api/admin/information'}).then(res=>{
+    request({ url: '/api/admin/information' }).then(res => {
       console.log(res.data);
     })
   }, [])
   const handleLogout = () => {
-    // logout
     localStorage.removeItem('token');
     router.push('/admin/login');
   }

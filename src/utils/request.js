@@ -17,7 +17,7 @@ request.interceptors.response.use(function (response) {
   authorization && localStorage.setItem(TOKEN, authorization);
   return response;
 }, function (error) {
-  if (error.response.status === 401) {
+  if (error?.response?.status === 401) {
     localStorage.removeItem(TOKEN);
     location.href = '/admin/login';
   }
