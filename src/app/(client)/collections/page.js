@@ -9,7 +9,7 @@ export default function collection() {
     <div>
       <div>This is All collections</div>
       <div>Test success!</div>
-      <div>Webhook success!</div>
+      <div>Webhook success!!!</div>
       <Button type="primary">All Collections</Button>
     </div>
   )
