@@ -34,7 +34,7 @@ export default function Component() {
         <div className='nav'>
           {
             nav.map(item => {
-              return <Link key={item.sort_by} href={item.link} className={'px-2 py-1 hover:bg-slate-100 rounded-sm font-bold' + (pathname === item.link ? ' text-red-500' : '')}>{item.name}</Link>
+              return <Link key={item.id} href={item.route} className={'px-2 py-1 hover:bg-slate-100 rounded-sm font-bold' + (pathname === item.route ? ' text-red-500' : '')}>{item.name}</Link>
             })
           }
         </div>
