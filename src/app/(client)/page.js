@@ -1,9 +1,9 @@
-import Swiper from "@/components/index/swiper"
+import Slideshow from "@/components/index/slideshow"
 
 export default function page() {
   return (
     <div className='content'>
-      <Swiper/>
+      <Slideshow/>
     </div>
   )
 }

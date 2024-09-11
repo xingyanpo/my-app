@@ -31,7 +31,7 @@ export default function SilderBar() {
         banners.map((item) => {
           return (
             <SwiperSlide key={item.id} className='h-full w-full'>
-              <Image className='w-full h-full object-cover' src={item.url} alt="banner" width={1920} height={1080} />
+              <Image className='w-full h-full object-cover' src={item.url} alt="banner" width={1920} height={1080} 	priority={true} />
             </SwiperSlide>
           )
         })

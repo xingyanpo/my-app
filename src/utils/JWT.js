@@ -6,9 +6,9 @@ const JWT = {
     const secret = new TextEncoder().encode(secretKey);
     return await new SignJWT(payload)
       .setProtectedHeader({ alg: 'HS256' })
-      .setIssuedAt() // 设置签发时间
-      .setExpirationTime(expiresIn) // 设置过期时间
-      .sign(secret); // 签名
+      .setIssuedAt() 
+      .setExpirationTime(expiresIn)
+      .sign(secret);
   },
   verify: async (token, secretKey = JWT_KEY) => {
     const secret = new TextEncoder().encode(secretKey);

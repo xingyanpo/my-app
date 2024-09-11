@@ -3,11 +3,11 @@ import Link from 'next/link';
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation';
+import { LOCAL_INFO } from '@/config/settings';
 
 export default function Component() {
   const [nav, setNav] = useState([]);
   const [info, setInfo] = useState({});
-  const LOCAL_INFO = 'info'
   const pathname = usePathname()
   useEffect(() => {
     fetch('/api/navigation/header').then(res => res.json()).then(data => {
