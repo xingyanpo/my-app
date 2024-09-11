@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import ProductItem from '@/components/products/product-item'
 
-export default function Page() {
+export default function Products() {
   const [data, setData] = useState([]);
   useEffect(() => {
     fetch('/api/products').then(res => res.json()).then(data => {

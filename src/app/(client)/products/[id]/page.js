@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 
-export default function Page({ params }) {
+export default function Product({ params }) {
   const [data, setData] = useState({});
   useEffect(() => {
     fetch(`/api/products/${params.id}`).then(res => res.json()).then(res => {

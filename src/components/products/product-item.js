@@ -6,7 +6,7 @@ export default function ProductItem({url, title, desc, featured_image, price, im
   return (
     <Link href={url} className='shadow-md rounded-md overflow-hidden pb-4 cursor-pointer block'>
       <div className='w-full aspect-video'>
-        {featured_image && <Image className='w-full h-full object-cover' src={featured_image} alt={title}  width={img_w ? img_w : 720} height={img_h ? img_h : 480}/>}
+        {featured_image && <Image className='w-full h-full object-cover' priority={true} src={featured_image} alt={title}  width={img_w ? img_w : 720} height={img_h ? img_h : 480}/>}
       </div>
       <div className='px-2 py-3'>
         {title && <h3 className='mt-2 text-md font-bold'>{title}</h3>}

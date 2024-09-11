@@ -15,7 +15,7 @@ export default function Page() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {
           data?.map((item) => (
-            <ProductItem key={item.id} title={item.collection_name} desc={item.collection_description} id={item.id} featured_image={`/images/${item.collection_featured_image}`} price={item.collection_price} url={`/collections/${item.collection_id}`}/>
+            <ProductItem key={item.collection_id} title={item.collection_name} desc={item.collection_description} featured_image={`/images/${item.collection_featured_image}`} price={item.collection_price} url={`/collections/${item.collection_id}`}/>
           ))
         }
       </div>
