@@ -2,7 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
+:root {--t-c: #448A3E;}
 .screen-h-re-heade {height: calc(100vh - 80px);}
 .swiper-pagination-bullet {background-color: rgba(255, 255, 255, 0) !important; opacity: 1 !important; width: 30px !important; height: 12px !important; border-radius: 10px !important;border: 1px solid #FFF !important;}
-.swiper-pagination-bullet-active {background-color: red !important;border: 1px solid #ffffff00 !important;}
+.swiper-pagination-bullet-active {background-color: var(--t-c) !important;border: 1px solid #ffffff00 !important;}
+
+.t-c {color: var(--t-c);}
+.t-c-bg {background-color: var(--t-c);}
+.border-c {border-color: var(--t-c)}
