@@ -67,55 +67,63 @@ export default function Component() {
               return (
                 <div className='nav-item relative group h-full grid place-items-center' key={item.id}>
                   <Link href={item.route} className={'px-2 mx-2 py-0.5 hover:bg-slate-100 font-bold text-lg ' + (pathname === item.route ? ' t-c' : '')}>{item.name}</Link>
-                  {item.route !== '/collections' ? <div className='absolute top-full left-1/2 w-56 text-center h-auto -translate-x-1/2 shadow-sm bg-white invisible group-hover:opacity-100 opacity-0 transition-all duration-300 group-hover:visible'>
-                    {
-                      item.children.length > 0 && <div className='py-6 border-t-4 border-c'>
-                        {item.children.map(child => {
-                          return (
-                            <div key={child.id} className=' hover:bg-slate-100'>
-                              <Link href={child.route} className={'px-2 font-bold block w-full py-3 text-md' + (pathname === child.route ? ' t-c' : '')}>{child.name}</Link>
-                            </div>
-                          )
-                        })
+                  {
+                    item.route !== '/collections'
+                      ?
+                      <div className='absolute top-full left-1/2 w-56 text-center h-auto -translate-x-1/2 shadow-sm bg-white invisible group-hover:opacity-100 opacity-0 transition-all duration-300 group-hover:visible'>
+                        {
+                          item.children.length > 0 && <div className='py-6 border-t-4 border-c'>
+                            {item.children.map(child => {
+                              return (
+                                <div key={child.id} className=' hover:bg-slate-100'>
+                                  <Link href={child.route} className={'px-2 font-bold block w-full py-3 text-md' + (pathname === child.route ? ' t-c' : '')}>{child.name}</Link>
+                                </div>
+                              )
+                            })
+                            }
+                          </div>
                         }
                       </div>
-                    }
-                  </div> : <div className='fixed top-20 left-0 right-0 h-auto bg-white shadow-sm border-t opacity-0 invisible group-hover:opacity-100 duration-300 group-hover:visible'>
-                    {
-                      item.children.length > 0 && <div className='py-4 container mx-auto grid grid-cols-[200px_auto] grid-flow-col'>
-                        <div className='left'>
-                          {item.children.map((child, index) => {
-                            return (
-                              <div key={child.id} className={`nav-list hover:bg-slate-100 + ${index === 0 ? 'bg-slate-100': ''}`} onMouseEnter={(e) => collectionSHandle(child, index)}>
-                                <Link href={child.route} className={'px-2 font-bold block w-full py-3 mb-2 text-md' + (pathname === child.route ? ' t-c' : '')}>{child.name}</Link>
+                      :
+                      <div className='fixed top-20 left-0 right-0 h-auto bg-white shadow-sm border-t opacity-0 invisible group-hover:opacity-100 duration-300 group-hover:visible'>
+                        {
+                          item.children.length > 0 && <div className='py-4 container mx-auto grid grid-cols-[200px_auto] grid-flow-col'>
+                            <div className='left'>
+                              {
+                                item.children.map((child, index) => {
+                                  return (
+                                    <div key={child.id} className={`nav-list hover:bg-slate-100 + ${index === 0 ? 'bg-slate-100' : ''}`} onMouseEnter={(e) => collectionSHandle(child, index)}>
+                                      <Link href={child.route} className={'px-2 font-bold block w-full py-3 mb-2 text-md' + (pathname === child.route ? ' t-c' : '')}>{child.name}</Link>
+                                    </div>
+                                  )
+                                })
+                              }
+                            </div>
+                            <div className='right'>
+                              <div className='grid grid-cols-4 gap-4 p-4 bg-slate-100'>
+                                {
+                                  collectionProducts?.products?.map(product => {
+                                    return (
+                                      <Link href={`/products/${product.product_id}`} key={product.product_id}>
+                                        <div className='w-full aspect-video '><Image src={`/images/${product.product_featured_image}`} width={200} height={200} alt="product" className='w-full h-full object-cover' priority={true} /></div>
+                                        <h2 className='block'>{product.product_name}</h2>
+                                      </Link>
+                                    )
+                                  }
+                                  )
+                                }
                               </div>
-                            )
-                          })
-                          }
-                        </div>
-                        <div className='right'><div className='grid grid-cols-4 gap-4 p-4 bg-slate-100'>
-                          {
-                            collectionProducts?.products?.map(product => {
-                              return (
-                                <Link href={`/products/${product.product_id}`} key={product.product_id}>
-                                  <div className='w-full aspect-video '><Image src={`/images/${product.product_featured_image}`} width={200} height={200} alt="product" className='w-full h-full object-cover' priority={true} /></div>
-                                  <h2 className='block'>{product.product_name}</h2>
-                                </Link>
-                              )
-                            }
-                            )
-                          }
-                        </div>
-                        </div>
+                            </div>
+                          </div>
+                        }
                       </div>
-                    }
-                  </div>}
+                  }
                 </div>
               )
             })
           }
         </div>
-        <div className='company'>
+        <div className='country'>
           <span className='font-bold'>{info.name}</span>
         </div>
       </div>
