@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link';
 import Image from 'next/image'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation';
 import { LOCAL_INFO } from '@/config/settings';
 
