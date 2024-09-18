@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link';
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation';
 import { LOCAL_INFO } from '@/config/settings';
 
@@ -10,6 +10,7 @@ export default function Component() {
   const [info, setInfo] = useState({});
   const [collection, setCollection] = useState([]);
   const [collectionProducts, setCollectionProducts] = useState({});
+  const mobileNavRef = useRef(null);
   const pathname = usePathname()
   useEffect(() => {
     fetch('/api/navigation/header').then(res => res.json()).then(data => {
@@ -55,13 +56,21 @@ export default function Component() {
       setCollectionProducts(products);
     }
   }, [nav, collection])
+  // mobile
+  const mobileNavHandle = () => {
+    mobileNavRef.current.classList.toggle('w-full');
+  }
+  const countries = [
+    { name: '新加坡', flag: '/svg/singapore.svg' },
+    { name: 'English', flag: '/svg/english.svg' },
+  ]
   return (
-    <header className="header sticky w-full top-0 left-0 z-30 bg-white h-20 shadow-sm flex items-center justify-center">
+    <header className=" header sticky w-full top-0 left-0 z-30 bg-white h-14 md:h-20 shadow-sm items-center justify-center">
       <div className='w-full flex items-center justify-between h-full container mx-auto'>
-        <div className='logo h-full py-2'>
+        <div className='logo h-full py-0 md:py-2'>
           <Link href={'/'}>{info.logo && <Image src={`/images/${info.logo}`} width={200} height={200} alt="logo" className='w-full h-full object-cover' priority={true} />}</Link>
         </div>
-        <div className='nav flex items-center h-full'>
+        <div className='nav hidden md:flex items-center h-full'>
           {
             nav.map(item => {
               return (
@@ -123,8 +132,27 @@ export default function Component() {
             })
           }
         </div>
-        <div className='country'>
-          <span className='font-bold'>{info.name}</span>
+        <div className='country hidden md:grid h-full place-content-center relative group'>
+          <div className='w-11 h-11 cursor-pointer'><Image src={'/svg/country.svg'} width={100} height={100} alt="country" className='w-full h-full object-cover' priority={true} /></div>
+          <div className='absolute top-20 left-1/2 flex flex-col items-center justify-center bg-white w-36 py-3 border-t-4 border-c -translate-x-1/2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out'>
+            {countries.map(country => {
+              return (
+                <Link key={country.name} href={'/country'} className='grid grid-cols-[30px_1fr] gap-2 p-2 items-center w-full hover:bg-slate-100 mb-1 duration-100 ease-in-out'>
+                  <Image src={country.flag} width={100} height={100} alt="country" className='w-full h-full object-cover' priority={true} />
+                  <span>{country.name}</span>
+                </Link>
+              )
+            })
+            }
+          </div>
+        </div>
+        <div className='navigation h-full block md:hidden'>
+          <div onClick={mobileNavHandle} className='h-full flex items-center justify-center p-3 cursor-pointer'><svg t="1726639845340" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4304" width="200" height="200"><path d="M38.5536 858.8288v-66.0992h946.944v66.0992H38.5536z m0-330.2912V462.4384H856.064v66.0992H38.5536z m0-330.3424v-66.048h946.944v66.0992H38.5536z" p-id="4305"></path></svg></div>
+          <div ref={mobileNavRef} className='fixed left-0 top-14 right-0 bottom-0 bg-white w-0 overflow-hidden transition-all duration-300 ease-in-out border-t border-gray-200'>
+            <div className='w-screen h-full flex flex-col justify-between'>
+
+            </div>
+          </div>
         </div>
       </div>
     </header>

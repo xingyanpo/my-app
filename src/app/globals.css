@@ -10,3 +10,4 @@
 .t-c {color: var(--t-c);}
 .t-c-bg {background-color: var(--t-c);}
 .border-c {border-color: var(--t-c)}
+svg {width: 100%;height: 100%; object-fit: contain;}
