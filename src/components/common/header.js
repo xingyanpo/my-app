@@ -14,7 +14,7 @@ export default function Component() {
   const [collectionProducts, setCollectionProducts] = useState({});
   const mobileNavRef = useRef(null);
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     fetch('/api/navigation/header').then(res => res.json()).then(data => {
       setNav(data.data);
