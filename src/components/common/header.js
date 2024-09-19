@@ -4,6 +4,8 @@ import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation';
 import { LOCAL_INFO } from '@/config/settings';
+import HeaderMobileNav from './header-mobile-nav';
+import HeaderMobileCountry from './header-mobile-country';
 
 export default function Component() {
   const [nav, setNav] = useState([]);
@@ -11,7 +13,8 @@ export default function Component() {
   const [collection, setCollection] = useState([]);
   const [collectionProducts, setCollectionProducts] = useState({});
   const mobileNavRef = useRef(null);
-  const pathname = usePathname()
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(true);
   useEffect(() => {
     fetch('/api/navigation/header').then(res => res.json()).then(data => {
       setNav(data.data);
@@ -58,7 +61,10 @@ export default function Component() {
   }, [nav, collection])
   // mobile
   const mobileNavHandle = () => {
-    mobileNavRef.current.classList.toggle('w-full');
+    setIsOpen(!isOpen);
+  }
+  const closeMobileNavHandle = () => {
+    setIsOpen(false);
   }
   const countries = [
     { name: '新加坡', flag: '/svg/singapore.svg' },
@@ -147,10 +153,24 @@ export default function Component() {
           </div>
         </div>
         <div className='navigation h-full block md:hidden'>
-          <div onClick={mobileNavHandle} className='h-full flex items-center justify-center p-3 cursor-pointer'><svg t="1726639845340" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4304" width="200" height="200"><path d="M38.5536 858.8288v-66.0992h946.944v66.0992H38.5536z m0-330.2912V462.4384H856.064v66.0992H38.5536z m0-330.3424v-66.048h946.944v66.0992H38.5536z" p-id="4305"></path></svg></div>
-          <div ref={mobileNavRef} className='fixed left-0 top-14 right-0 bottom-0 bg-white w-0 overflow-hidden transition-all duration-300 ease-in-out border-t border-gray-200'>
-            <div className='w-screen h-full flex flex-col justify-between'>
-
+          <div onClick={mobileNavHandle} className='h-full flex items-center justify-center p-3 cursor-pointer'>
+            {
+              !isOpen ?
+                <svg t="1726639845340" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4304" width="200" height="200"><path d="M38.5536 858.8288v-66.0992h946.944v66.0992H38.5536z m0-330.2912V462.4384H856.064v66.0992H38.5536z m0-330.3424v-66.048h946.944v66.0992H38.5536z" p-id="4305"></path></svg>
+                :
+                <svg t="1726727170106" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4273" width="200" height="200"><path d="M850.538343 895.516744c-11.494799 0-22.988574-4.386914-31.763424-13.161764L141.103692 204.669426c-17.548678-17.534352-17.548678-45.992497 0-63.525825 17.548678-17.548678 45.977147-17.548678 63.525825 0l677.671227 677.685553c17.548678 17.534352 17.548678 45.992497 0 63.525825C873.526917 891.128807 862.032118 895.516744 850.538343 895.516744z" fill="#2c2c2c" p-id="4274"></path><path d="M172.867116 895.516744c-11.494799 0-22.988574-4.386914-31.763424-13.161764-17.548678-17.534352-17.548678-45.992497 0-63.525825l677.671227-677.685553c17.548678-17.548678 45.977147-17.548678 63.525825 0 17.548678 17.534352 17.548678 45.992497 0 63.525825L204.629517 882.354979C195.85569 891.128807 184.360891 895.516744 172.867116 895.516744z" fill="#2c2c2c" p-id="4275"></path></svg>
+            }
+          </div>
+          <div ref={mobileNavRef} className={'fixed left-0 top-14 right-0 bottom-0 bg-white overflow-hidden transition-all duration-300 ease-in-out border-t border-gray-200' + (isOpen ? ' w-full' : ' w-0')}>
+            <div className=' h-full flex flex-col overflow-y-scroll p-2 w-screen'>
+              {
+                nav.map(item => {
+                  return (
+                    <HeaderMobileNav item={item} key={item.id} closeMobileNavHandle={closeMobileNavHandle}/>
+                  )
+                })
+              }
+              <HeaderMobileCountry countries={countries}/>
             </div>
           </div>
         </div>
