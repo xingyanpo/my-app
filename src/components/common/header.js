@@ -3,13 +3,11 @@ import Link from 'next/link';
 import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation';
-import { LOCAL_INFO } from '@/config/settings';
 import HeaderMobileNav from './header-mobile-nav';
 import HeaderMobileCountry from './header-mobile-country';
 
 export default function Component() {
   const [nav, setNav] = useState([]);
-  const [info, setInfo] = useState({});
   const [collection, setCollection] = useState([]);
   const [collectionProducts, setCollectionProducts] = useState({});
   const mobileNavRef = useRef(null);
@@ -19,17 +17,6 @@ export default function Component() {
     fetch('/api/navigation/header').then(res => res.json()).then(data => {
       setNav(data.data);
     })
-  }, [])
-  useEffect(() => {
-    const localInfo = localStorage.getItem(LOCAL_INFO);
-    if (localInfo) {
-      setInfo(JSON.parse(localInfo));
-    } else {
-      fetch('/api/information').then(res => res.json()).then(data => {
-        setInfo(data.data);
-        localStorage.setItem(LOCAL_INFO, JSON.stringify(data.data));
-      })
-    }
   }, [])
   const collectionSHandle = async (data, index) => {
     const id = data.route.split('/collections/')[1];
@@ -74,7 +61,7 @@ export default function Component() {
     <header className=" header sticky w-full top-0 left-0 z-30 bg-white h-14 md:h-20 shadow-sm items-center justify-center">
       <div className='w-full flex items-center justify-between h-full container mx-auto'>
         <div className='logo h-full py-0 md:py-2'>
-          <Link href={'/'}>{info.logo && <Image src={`/images/${info.logo}`} width={200} height={200} alt="logo" className='w-full h-full object-cover' priority={true} />}</Link>
+          <Link href={'/'}><Image src={`/images/logo.jpg`} width={200} height={200} alt="logo" className='w-full h-full object-cover' priority={true} /></Link>
         </div>
         <div className='nav hidden md:flex items-center h-full'>
           {
