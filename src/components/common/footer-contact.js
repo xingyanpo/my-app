@@ -30,7 +30,6 @@ export default function FooterContact() {
   useEffect(() => {
     fetch('/api/information').then(res => res.json()).then(data => {
       setInfo(data.data);
-      console.log(data.data)
     })
   }, [])
   return (
