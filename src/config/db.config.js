@@ -3,7 +3,7 @@ import mysql from 'mysql2/promise';
 export default mysql.createPool({
   host: 'xypcn.top',
   user: 'root',
-  password: 'mysql_y5nKYY',
+  password: 'mysql_WSEMBT',
   database: 'dev',
   waitForConnections: true,
   connectionLimit: 10,
