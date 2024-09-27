@@ -1,15 +1,21 @@
 import mysql from 'mysql2/promise';
 
-export default mysql.createPool({
+const pool = mysql.createPool({
   host: 'xypcn.top',
   user: 'root',
   password: 'mysql_WSEMBT',
   database: 'dev',
   waitForConnections: true,
-  connectionLimit: 10,
-  maxIdle: 10, 
-  idleTimeout: 60000,
+  connectionLimit: 20,
+  maxIdle: 5, 
+  idleTimeout: 30000,
   queueLimit: 0,
   enableKeepAlive: true,
-  keepAliveInitialDelay: 0,
+  keepAliveInitialDelay: 10000,
 });
+
+pool.on('error', (err) => {
+  console.error('Unexpected error on idle client', err);
+});
+
+export default pool
