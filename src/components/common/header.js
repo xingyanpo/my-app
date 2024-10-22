@@ -127,7 +127,7 @@ export default function Component() {
         </div>
         <div className='country hidden md:grid h-full place-content-center relative group'>
           <div className='w-11 h-11 cursor-pointer'><Image src={'/svg/country.svg'} width={100} height={100} alt="country" className='w-full h-full object-cover' priority={true} /></div>
-          <div className='absolute top-20 left-1/2 flex flex-col items-center justify-center bg-white w-36 py-3 border-t-4 border-c -translate-x-1/2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out'>
+          <div className='absolute top-14 left-1/2 flex flex-col items-center justify-center bg-white w-36 py-3 border-t-4 border-c -translate-x-1/2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out'>
             {countries.map(country => {
               return (
                 <Link key={country.name} href={'/country'} className='grid grid-cols-[30px_1fr] gap-2 p-2 items-center w-full hover:bg-slate-100 mb-1 duration-100 ease-in-out'>
