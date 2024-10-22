@@ -58,7 +58,7 @@ export default function Component() {
     { name: 'English', flag: '/svg/english.svg' },
   ]
   return (
-    <header className=" header sticky w-full top-0 left-0 z-30 bg-white h-14 md:h-20 shadow-sm items-center justify-center">
+    <header className=" header sticky w-full top-0 left-0 z-30 bg-white h-14 shadow-sm items-center justify-center">
       <div className='w-full flex items-center justify-between h-full container mx-auto'>
         <div className='logo h-full py-0 md:py-2'>
           <Link href={'/'}><Image src={`/images/logo.jpg`} width={200} height={200} alt="logo" className='w-full h-full object-cover' priority={true} /></Link>
@@ -87,7 +87,7 @@ export default function Component() {
                         }
                       </div>
                       :
-                      <div className='fixed top-20 left-0 right-0 h-auto bg-white shadow-sm border-t opacity-0 invisible group-hover:opacity-100 duration-300 group-hover:visible'>
+                      <div className='fixed top-14 left-0 right-0 h-auto bg-white shadow-sm border-t opacity-0 invisible group-hover:opacity-100 duration-300 group-hover:visible'>
                         {
                           item.children.length > 0 && <div className='py-4 container mx-auto grid grid-cols-[200px_auto] grid-flow-col'>
                             <div className='left'>
