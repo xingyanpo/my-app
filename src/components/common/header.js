@@ -153,11 +153,11 @@ export default function Component() {
               {
                 nav.map(item => {
                   return (
-                    <HeaderMobileNav item={item} key={item.id} closeMobileNavHandle={closeMobileNavHandle}/>
+                    <HeaderMobileNav item={item} key={item.id} closeMobileNavHandle={closeMobileNavHandle} />
                   )
                 })
               }
-              <HeaderMobileCountry countries={countries}/>
+              <HeaderMobileCountry countries={countries} />
             </div>
           </div>
         </div>
